@@ -1,1 +1,10 @@
-POST http://localhost:8080/customers/1/activity?correct=true
+
+POST http://localhost:8080/customers/3/answer
+Content-Type: application/json
+
+{
+  "questionId": 1,
+  "answer": "Paris"
+}
+
+
