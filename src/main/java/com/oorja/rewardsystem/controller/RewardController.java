@@ -5,6 +5,7 @@ import com.oorja.rewardsystem.entity.Customer;
 import com.oorja.rewardsystem.entity.Question;
 import com.oorja.rewardsystem.repository.QuestionRepository;
 import com.oorja.rewardsystem.service.RewardService;
+import java.util.List;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,5 +36,11 @@ public class RewardController {
         return questionRepository.save(
             new Question("What is the capital of France?", "Paris")
         );
+    }
+
+
+    @GetMapping
+    public List<Customer> getAllCustomers() {
+        return service.getAllCustomers();
     }
 }

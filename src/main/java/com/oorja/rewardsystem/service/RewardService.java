@@ -8,6 +8,7 @@ import com.oorja.rewardsystem.repository.AnswerRepository;
 import com.oorja.rewardsystem.repository.CustomerRepository;
 import com.oorja.rewardsystem.repository.QuestionRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,11 +35,7 @@ public class RewardService {
         return customerRepository.save(new Customer());
     }
 
-    @Transactional
-    public Customer updatePoints(Long id, boolean correct) {
-
-        Customer customer = customerRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Customer not found"));
+    private void updateCustomerPoints(Customer customer, boolean correct) {
 
         int points = customer.getRewardPoints();
 
@@ -49,8 +46,6 @@ public class RewardService {
         }
 
         customer.setRewardPoints(points);
-
-        return customer;
     }
 
     @Transactional
@@ -65,15 +60,7 @@ public class RewardService {
         boolean isCorrect =
             question.getCorrectAnswer().equalsIgnoreCase(request.getAnswer());
 
-        int points = customer.getRewardPoints();
-
-        if (isCorrect) {
-            points = Math.min(MAX_POINTS, points + REWARD_POINTS);
-        } else {
-            points = Math.max(0, points - PENALTY_POINTS);
-        }
-
-        customer.setRewardPoints(points);
+        updateCustomerPoints(customer, isCorrect);
 
         Answer answer = new Answer(
             request.getAnswer(),
@@ -84,8 +71,10 @@ public class RewardService {
 
         answerRepository.save(answer);
 
-        return customer;   // 👈 IMPORTANT
+        return customer;
     }
 
-
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
 }
