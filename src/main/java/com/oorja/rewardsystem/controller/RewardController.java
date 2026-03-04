@@ -38,6 +38,10 @@ public class RewardController {
         );
     }
 
+    @PostMapping("/{customerId}/finish")
+    public Customer finishQuiz(@PathVariable Long customerId) {
+        return service.finalizeScore(customerId);
+    }
 
     @GetMapping
     public List<Customer> getAllCustomers() {

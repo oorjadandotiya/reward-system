@@ -157,10 +157,20 @@
   }
 
   async function finishQuiz() {
+
+    await fetch(`/customers/${customerId}/finish`, {
+      method: 'POST'
+    });
+
     const response = await fetch(`/customers`);
     const customers = await response.json();
 
     const customer = customers.find(c => c.id == customerId);
+
+    if (!customer) {
+      alert("Customer not found.");
+      return;
+    }
 
     document.getElementById('quizSection').style.display = 'none';
     document.getElementById('resultSection').style.display = 'block';

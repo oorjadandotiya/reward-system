@@ -42,7 +42,7 @@ public class RewardService {
         if (correct) {
             points = Math.min(MAX_POINTS, points + REWARD_POINTS);
         } else {
-            points = Math.max(0, points - PENALTY_POINTS);
+            points = points - PENALTY_POINTS;
         }
 
         customer.setRewardPoints(points);
@@ -76,5 +76,17 @@ public class RewardService {
 
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    public Customer finalizeScore(Long customerId) {
+
+        Customer customer = customerRepository.findById(customerId)
+            .orElseThrow(() -> new RuntimeException("Customer not found"));
+
+        if (customer.getRewardPoints() < 0) {
+            customer.setRewardPoints(0);
+        }
+
+        return customerRepository.save(customer);
     }
 }
