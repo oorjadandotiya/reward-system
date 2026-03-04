@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RewardService {
 
-    private static final int MAX_POINTS = 1000;
+    private static final int MAX_POINTS = 30;
     private static final int REWARD_POINTS = 10;
     private static final int PENALTY_POINTS = 5;
 
