@@ -8,6 +8,7 @@ import com.oorja.rewardsystem.repository.AnswerRepository;
 import com.oorja.rewardsystem.repository.CustomerRepository;
 import com.oorja.rewardsystem.repository.QuestionRepository;
 import jakarta.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +75,16 @@ public class RewardService {
         return customer;
     }
 
+    public List<Question> getRandomQuestions() {
+
+        List<Question> allQuestions = questionRepository.findAll();
+
+        Collections.shuffle(allQuestions);
+
+        return allQuestions.stream()
+            .limit(5)
+            .toList();
+    }
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }

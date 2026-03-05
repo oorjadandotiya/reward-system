@@ -19,11 +19,23 @@ public class DataLoader implements CommandLineRunner {
 
         if (questionRepository.count() == 0) {
 
-            questionRepository.save(new Question("Capital of France?", "Paris"));
-            questionRepository.save(new Question("2 + 2?", "4"));
-            questionRepository.save(new Question("Capital of Germany?", "Berlin"));
-            questionRepository.save(new Question("5 x 3?", "15"));
-            questionRepository.save(new Question("Sun rises from?", "East"));
+            questionRepository.save(new Question("What is the capital of France?", "Paris"));
+            questionRepository.save(new Question("What is the answer to the arithmetic equation: 2 + 2? (Input a number)", "4"));
+            questionRepository.save(new Question("What is the capital of Germany?", "Berlin"));
+            questionRepository.save(new Question("What is the answer to the arithmetic equation: 5 x 3? (Input a number)", "15"));
+            questionRepository.save(new Question("What direction does the sun rise from?", "East"));
+            questionRepository.save(new Question("What is the capital of the United Kingdom?", "London"));
+            questionRepository.save(new Question("How many days are there in a leap year? (Input a number)", "366"));
+            questionRepository.save(new Question("How many sides does a hexagon have? (Input a number)", "6"));
+            questionRepository.save(new Question("What is the smallest prime number? (Input a number)", "2"));
+            questionRepository.save(new Question("What direction does the sun set?", "West"));
+            questionRepository.save(new Question("Which planet is known as the Red Planet?", "Mars"));
+            questionRepository.save(new Question("How many continents are there on Earth? (Input a number)", "7"));
+            questionRepository.save(new Question("Which organ pumps blood throughout the human body?", "Heart"));
+            questionRepository.save(new Question("Which country is famous for the Eiffel Tower?", "France"));
+            questionRepository.save(new Question("How many hours are there in a day? (Input a number)", "24"));
         }
+
+
     }
 }

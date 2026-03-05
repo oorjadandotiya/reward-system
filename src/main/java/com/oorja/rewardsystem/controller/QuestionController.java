@@ -1,43 +1,39 @@
 package com.oorja.rewardsystem.controller;
 
 import com.oorja.rewardsystem.entity.Question;
-import com.oorja.rewardsystem.repository.QuestionRepository;
+import com.oorja.rewardsystem.service.RewardService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
- * Controller class that handles HTTP requests related to questions.
- * It provides endpoints for retrieving question data from the database.
+ * Controller class that handles HTTP requests related to quiz questions.
+ * It exposes endpoints for retrieving questions for the quiz.
  */
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
 
-    /**
-     * Repository used to interact with the Question table in the database.
-     */
-    private final QuestionRepository repository;
+    private final RewardService rewardService;
 
     /**
-     * Constructs a QuestionController with the givem QuestionRepository.
+     * Constructs a QuestionController with the RewardService.
      *
-     * @param repository the repository used to perform database operations on Question entities
+     * @param rewardService the service responsible for question business logic
      */
-    public QuestionController(QuestionRepository repository) {
-        this.repository = repository;
+    public QuestionController(RewardService rewardService) {
+        this.rewardService = rewardService;
     }
 
     /**
-     * Retrieves all questions stored in the database.
+     * Retrieves 5 randomly selected questions for the quiz.
      *
-     * It handles HTTP GET requests sent to the "/questions" endpoint
-     * and then it returns a list of all Question objects.
+     * This endpoint handles HTTP GET requests to "/questions".
      *
-     * @return a list containing all questions
+     * @return a list of randomly selected questions
      */
     @GetMapping
-    public List<Question> getAllQuestions() {
-        return repository.findAll();
+    public List<Question> getRandomQuestions() {
+        return rewardService.getRandomQuestions();
     }
 }
