@@ -3,6 +3,7 @@ package com.oorja.rewardsystem;
 import com.oorja.rewardsystem.dto.AnswerRequest;
 import com.oorja.rewardsystem.entity.Customer;
 import com.oorja.rewardsystem.entity.Question;
+import com.oorja.rewardsystem.repository.AnswerRepository;
 import com.oorja.rewardsystem.repository.CustomerRepository;
 import com.oorja.rewardsystem.repository.QuestionRepository;
 import com.oorja.rewardsystem.service.RewardService;
@@ -26,11 +27,15 @@ class RewardSystemApplicationTests {
 	@Autowired
 	private QuestionRepository questionRepository;
 
+	@Autowired
+	private AnswerRepository answerRepository;
+
 	private Customer customer;
 	private Question question;
 
 	@BeforeEach
 	void setup() {
+		answerRepository.deleteAll();
 		customerRepository.deleteAll();
 		questionRepository.deleteAll();
 
