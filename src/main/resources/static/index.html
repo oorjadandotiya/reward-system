@@ -81,7 +81,7 @@
     <input type="text" id="answerInput" placeholder="Enter your answer"/>
 
     <div>
-      <button onclick="previousQuestion()" id="backBtn">Back</button>
+      <button onclick="previousQuestion()">Back</button>
       <button onclick="submitAnswer()">Next</button>
     </div>
 
@@ -230,10 +230,15 @@
 
   function previousQuestion() {
 
-    if (currentQuestionIndex > 0) {
-      currentQuestionIndex--;
-      showQuestion();
+    // If we are on the first question, go back to home
+    if (currentQuestionIndex === 0) {
+      goToStart();
+      return;
     }
+
+    // Otherwise go to previous question
+    currentQuestionIndex--;
+    showQuestion();
   }
 
 </script>
