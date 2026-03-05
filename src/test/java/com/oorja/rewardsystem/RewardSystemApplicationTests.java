@@ -15,24 +15,52 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
+
+/**
+ * Integration tests for the Reward System application.
+ *
+ * This test class verifies the behaviour of the RewardService and
+ * related database operations. It ensures that reward points are
+ * correctly awarded or deducted based on submitted answers and
+ * validates error handling for invalid inputs.
+ */
 @SpringBootTest
 class RewardSystemApplicationTests {
 
+	/**
+	 * Service used to process quiz answers and manage reward points.
+	 */
 	@Autowired
 	private RewardService rewardService;
 
+	/**
+	 * Repository used to manage Customer entities during testing.
+	 */
 	@Autowired
 	private CustomerRepository customerRepository;
 
+	/**
+	 * Repository used to manage Question entities during testing.
+	 */
 	@Autowired
 	private QuestionRepository questionRepository;
 
+	/**
+	 * Repository used to manage Answer entities during testing.
+	 */
 	@Autowired
 	private AnswerRepository answerRepository;
 
 	private Customer customer;
 	private Question question;
 
+	/**
+	 * Initializes test data before each test runs.
+	 *
+	 * This method clears existing database records and creates
+	 * a new customer and question to be used in the test cases.
+	 */
 	@BeforeEach
 	void setup() {
 		answerRepository.deleteAll();
@@ -48,6 +76,10 @@ class RewardSystemApplicationTests {
 		question = questionRepository.save(question);
 	}
 
+	/**
+	 * Tests that submitting a correct answer awards reward points.
+	 * The expected result is an increase of 10 points.
+	 */
 	@Test
 	void correctAnswerAddsPoints() {
 
@@ -60,6 +92,10 @@ class RewardSystemApplicationTests {
 		assertEquals(10, updated.getRewardPoints());
 	}
 
+	/**
+	 * Tests that submitting an incorrect answer deducts reward points.
+	 * The expected result is a deduction of 5 points.
+	 */
 	@Test
 	void incorrectAnswerDeductsPoints() {
 
@@ -72,6 +108,10 @@ class RewardSystemApplicationTests {
 		assertEquals(-5, updated.getRewardPoints());
 	}
 
+	/**
+	 * Tests that a customer's reward points do not exceed the
+	 * defined maximum limit.
+	 */
 	@Test
 	void pointsShouldNotExceedMaximum() {
 
@@ -89,6 +129,10 @@ class RewardSystemApplicationTests {
 		assertTrue(updated.getRewardPoints() <= 30);
 	}
 
+	/**
+	 * Tests that submitting an answer with an invalid customer ID
+	 * results in a RuntimeException.
+	 */
 	@Test
 	void invalidCustomerThrowsException() {
 
@@ -101,6 +145,10 @@ class RewardSystemApplicationTests {
 		);
 	}
 
+	/**
+	 * Tests that submitting an answer with an invalid question ID
+	 * results in a RuntimeException.
+	 */
 	@Test
 	void invalidQuestionThrowsException() {
 

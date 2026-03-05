@@ -5,15 +5,40 @@ import com.oorja.rewardsystem.repository.QuestionRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+/**
+ * Component responsible for loading initial data into the database
+ * when the application starts.
+ *
+ * This class implements CommandLineRunner, which allows code to run
+ * automatically after the Spring Boot application has finished starting.
+ * It checks whether any questions exist in the database and inserts
+ * a predefined set of quiz questions if the database is empty.
+ */
 @Component
 public class DataLoader implements CommandLineRunner {
 
+    /**
+     * Repository used to perform database operations on Question entities.
+     */
     private final QuestionRepository questionRepository;
 
+    /**
+     * Constructs a DataLoader with the required QuestionRepository.
+     *
+     * @param questionRepository repository used to store and retrieve questions
+     */
     public DataLoader(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
+    /**
+     * Method executed automatically when the application starts.
+     *
+     * If no questions are present in the database, this method populates
+     * the database with a predefined list of quiz questions and answers.
+     *
+     * @param args command-line arguments passed to the application
+     */
     @Override
     public void run(String... args) {
 

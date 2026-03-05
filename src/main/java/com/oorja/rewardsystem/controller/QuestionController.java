@@ -14,6 +14,10 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
 
+
+    /**
+     * Service used to handle business logic related to customers and rewards.
+     */
     private final RewardService rewardService;
 
     /**
