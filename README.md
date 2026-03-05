@@ -80,6 +80,10 @@ Once the server starts, open a browser and navigate to:
 
 http://localhost:8080
 
+## Demo Video
+
+A video representing how the application runs is also present in the repository under the file name: "demo-video.mp4"
+
 
 ## Author
 
