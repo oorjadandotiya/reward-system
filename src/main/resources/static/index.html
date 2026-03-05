@@ -57,7 +57,12 @@
 <body>
 
 <div class="container">
-<h1>Quiz</h1>
+  <h1>Quiz</h1>
+  <p style="color: #555; font-size: 14px; margin-bottom: 25px;">
+    Scoring: Each correct answer earns <b>10 points</b>, each incorrect answer deducts <b>5 points</b>. Maximum score is <b>30 points</b>.
+    Click <b>Create Customer</b> to make a new customer, then select a customer from the drop-down list and finally click <b>Begin</b> to start the quiz.
+  </p>
+
 
 <!-- Customer Selection -->
 <div id="customerSection">
@@ -104,7 +109,7 @@
     const customers = await response.json();
 
     const select = document.getElementById('customerSelect');
-    select.innerHTML = '';
+    select.innerHTML = '<option value="">-- Select a Customer --</option>';
 
     customers.forEach(customer => {
       const option = document.createElement('option');
