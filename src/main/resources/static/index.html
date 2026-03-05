@@ -67,20 +67,26 @@
 <!-- Customer Selection -->
 <div id="customerSection">
   <h3>Select Customer</h3>
-  <select id="customerSelect"></select>
   <button onclick="createCustomer()">Create New Customer</button>
+  <select id="customerSelect"></select>
   <button onclick="startQuiz()">Start Quiz</button>
 </div>
 
 
 
 <!-- Quiz Section -->
-<div id="quizSection" style="display:none;">
-  <h3 id="questionText"></h3>
-  <input type="text" id="answerInput" placeholder="Enter your answer"/>
-  <button onclick="submitAnswer()">Submit</button>
-  <p id="progress"></p>
-</div>
+  <div id="quizSection" style="display:none;">
+    <h3 id="questionText"></h3>
+
+    <input type="text" id="answerInput" placeholder="Enter your answer"/>
+
+    <div>
+      <button onclick="previousQuestion()" id="backBtn">Back</button>
+      <button onclick="submitAnswer()">Next</button>
+    </div>
+
+    <p id="progress"></p>
+  </div>
 
 
 
@@ -140,13 +146,22 @@
   }
 
   function showQuestion() {
+
     const question = questions[currentQuestionIndex];
+
     document.getElementById('questionText').innerText = question.questionText;
+
     document.getElementById('progress').innerText =
         "Question " + (currentQuestionIndex + 1) + " of " + questions.length;
+
+    document.getElementById('answerInput').value = "";
+
+    document.getElementById('backBtn').disabled = currentQuestionIndex === 0;
+
   }
 
   async function submitAnswer() {
+
     const answer = document.getElementById('answerInput').value;
 
     await fetch(`/customers/${customerId}/answer`, {
@@ -211,6 +226,14 @@
 
     // Reload customers (to update points display)
     loadCustomers();
+  }
+
+  function previousQuestion() {
+
+    if (currentQuestionIndex > 0) {
+      currentQuestionIndex--;
+      showQuestion();
+    }
   }
 
 </script>
