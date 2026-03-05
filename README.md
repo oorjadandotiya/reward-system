@@ -37,12 +37,12 @@ The application exposes REST APIs and includes a simple web interface for intera
 ## Project Structure
 
 src/main/java/com/oorja/rewardsystem
-├── controller # REST API controllers
-├── service # Business logic
-├── repository # Database access layer
-├── entity # JPA entities
-├── dto # Data transfer objects
-└── RewardSystemApplication
+- controller # REST API controllers
+- service # Business logic
+- repository # Database access layer
+- entity # JPA entities
+- dto # Data transfer objects
+- RewardSystemApplication
 
 ## Requirements
 
@@ -57,21 +57,22 @@ To run this application you will need:
 
 git clone https://github.com/oorjadandotiya/reward-system.git
 
-### 2. Run the Application
+### 2. Navigate to the project directory:
 
-Using Maven wrapper:
+cd reward-system
 
-Windows:
+### 3. Run the Application
 
-mvnw.cmd spring-boot:run
+- Using Maven wrapper:
 
-Mac / Linux:
+Windows: mvnw.cmd spring-boot:run
 
-./mvnw spring-boot:run
+Mac/Linux: ./mvnw spring-boot:run
 
-Alternatively, you can run the application directly from your IDE by running:
 
-RewardSystemApplication.java
+- Alternatively, you can run the application directly from your IDE by running:
+
+RewardSystemApplication.java (This can be run by building a new project in IDEs like IntelliJ using pom.xml to build the project after downloading a .zip file of the git repository)
 
 ### 3. Access the Application
 
